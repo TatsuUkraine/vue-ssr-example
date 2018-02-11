@@ -1,7 +1,7 @@
 import HttpContract from '@/service/contract/Http';
 
-export default class Authors {
-    private url: string = '/v2/authors';
+export default class Books {
+    private url: string = '/v2/books';
     private http: any;
 
     constructor(http: HttpContract) {

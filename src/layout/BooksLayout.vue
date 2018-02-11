@@ -1,15 +1,15 @@
 <template>
-    
+    <div>Books</div>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import AuthorsApi from '../api/Authors';
+    import { Books } from '@/api';
 
     @Component({})
-    export default class Authors extends Vue {
+    export default class BooksLayout extends Vue {
         mounted () {
-            AuthorsApi.getCollection();
+            Books.getCollection();
         }
     }
 </script>

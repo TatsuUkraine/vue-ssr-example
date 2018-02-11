@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Posts from './layout/Authors.vue'
+import AuthorLayout from '@/layout/AuthorLayout.vue'
+import BooksLayout from '@/layout/BooksLayout.vue'
 
 Vue.use(Router)
 
@@ -9,8 +10,13 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'posts',
-      component: Posts
+      name: 'authors',
+      component: AuthorLayout
+    },
+    {
+        path: '/books',
+        name: 'books',
+        component: BooksLayout
     },
   ]
 })
