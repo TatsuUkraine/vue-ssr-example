@@ -1,15 +1,26 @@
 <template>
-    <div>Books</div>
+    <v-layout row>
+        <BooksList :books="books"></BooksList>
+    </v-layout>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import { Books } from '@/api';
+    import {BOOKS_FETCH_COLLECTION} from "@/store/module/book/actionTypes";
+    import BooksList from "@/books/component/BooksList.vue";
 
-    @Component({})
+    @Component({
+        components: {
+            BooksList
+        }
+    })
     export default class BooksLayout extends Vue {
         mounted () {
-            Books.getCollection();
+            this.$store.dispatch(BOOKS_FETCH_COLLECTION);
+        }
+
+        get books () {
+            return this.$store.state.book.collection
         }
     }
 </script>

@@ -3,8 +3,8 @@ import { State } from './state'
 import { AUTHORS_ADD_ITEMS_TO_COLLECTION, AUTHORS_SET_COLLECTION } from './mutationTypes'
 
 export default <MutationTree<State>> {
-    [AUTHORS_ADD_ITEMS_TO_COLLECTION](state: {[key: string]: any}, ...authors: {[key: string]: any}[]) {
-        let authorCollection = [...state.authors];
+    [AUTHORS_ADD_ITEMS_TO_COLLECTION](state: {[key: string]: any}, authors: {[key: string]: any}[]) {
+        let authorCollection = [...state.collection];
 
         for (let i = 0; i < authors.length; i++) {
             let authorIndex = authorCollection.findIndex(function (item: {[key: string]: any}) {
@@ -18,11 +18,11 @@ export default <MutationTree<State>> {
             }
         }
 
-        state.authors = [...authorCollection];
+        state.collection = [...authorCollection];
     },
 
-    [AUTHORS_SET_COLLECTION](state: {[key: string]: any}, ...authors: {[key: string]: any}[]) {
-        state.authors = {...authors};
+    [AUTHORS_SET_COLLECTION](state: {[key: string]: any}, authors: {[key: string]: any}[]) {
+        state.collection = [...authors];
     }
 
 }
