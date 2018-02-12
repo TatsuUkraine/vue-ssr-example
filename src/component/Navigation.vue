@@ -3,16 +3,12 @@
         <v-toolbar-title>PU Search</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items>
-            <router-link to="/">
-                <v-btn flat>
+            <v-btn flat :to="{name: 'authors'}" exact>
                     Authors
-                </v-btn>
-            </router-link>
-            <router-link to="/books">
-                <v-btn flat>
-                    Books
-                </v-btn>
-            </router-link>
+            </v-btn>
+            <v-btn flat :to="{name: 'books'}" exact>
+                Books
+            </v-btn>
         </v-toolbar-items>
     </v-toolbar>
 </template>
