@@ -13,7 +13,6 @@
         book: any
 
         get title () {
-            debugger;
             return this.book.attributes.title;
         }
     }
