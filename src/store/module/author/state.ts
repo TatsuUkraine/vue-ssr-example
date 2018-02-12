@@ -1,7 +1,5 @@
 export class State {
-    namespaced: boolean = true
+    authors: {[key: string]: any}[] = []
 
-    posts: {[key: string]: any}[] = []
-
-    filteredPosts: {[key: string]: any}[] = []
+    filteredAuthors: {[key: string]: any}[] = []
 }

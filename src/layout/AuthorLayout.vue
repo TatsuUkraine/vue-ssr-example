@@ -4,12 +4,13 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import { Authors } from '@/api';
+    import {AUTHORS_FETCH_COLLECTION} from "../store/module/author/actionTypes";
+
 
     @Component({})
     export default class AuthorLayout extends Vue {
         mounted () {
-            Authors.getCollection();
+            this.$store.dispatch(AUTHORS_FETCH_COLLECTION);
         }
     }
 </script>
