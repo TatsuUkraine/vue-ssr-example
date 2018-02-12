@@ -4,7 +4,7 @@
         <v-spacer></v-spacer>
         <v-toolbar-items>
             <v-btn flat :to="{name: 'authors'}" exact>
-                    Authors
+                Authors
             </v-btn>
             <v-btn flat :to="{name: 'books'}" exact>
                 Books

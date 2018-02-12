@@ -1,7 +1,3 @@
 import AxiosHttpService from './AxiosHttp';
 
-const Http = new AxiosHttpService;
-
-export {
-    Http
-}
+export const Http = new AxiosHttpService;
