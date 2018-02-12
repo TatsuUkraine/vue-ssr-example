@@ -8,8 +8,8 @@ export default class Authors {
         this.http = http;
     }
 
-    public getCollection(): Promise<{[key: string]: any}> {
-        return this.http.get(this.url)
+    public getCollection(params: {[key: string]: string} = {}): Promise<{[key: string]: any}> {
+        return this.http.get(this.url, params)
     };
 
     public getById(id: number): Promise<{[key: string]: any}> {

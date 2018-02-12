@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex'
 import { State } from './state'
-import { BOOKS_ADD_ITEMS_TO_COLLECTION, BOOKS_SET_COLLECTION } from './mutationTypes'
+import { BOOKS_ADD_ITEMS_TO_COLLECTION, BOOKS_SET_COLLECTION } from './type/mutation'
 
 export default <MutationTree<State>> {
     [BOOKS_ADD_ITEMS_TO_COLLECTION](state: {[key: string]: any}, books: {[key: string]: any}[]) {

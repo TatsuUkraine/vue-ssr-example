@@ -1,12 +1,13 @@
 import { GetterTree } from "vuex"
 import { State } from './state'
+import {BOOK_GET_COLLECTION, BOOK_GET_FILTERED_COLLECTION} from "./type/getter";
 
 export default <GetterTree<State, any>> {
-    getBookCollection(state: State): {[key: string]: any}[] {
+    [BOOK_GET_COLLECTION](state: State): {[key: string]: any}[] {
         return state.collection;
     },
 
-    getFilteredBookCollection(state: State): {[key: string]: any}[] {
+    [BOOK_GET_FILTERED_COLLECTION](state: State): {[key: string]: any}[] {
         return state.filteredCollection;
     }
 };

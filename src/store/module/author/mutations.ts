@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex'
 import { State } from './state'
-import { AUTHORS_ADD_ITEMS_TO_COLLECTION, AUTHORS_SET_COLLECTION } from './mutationTypes'
+import { AUTHORS_ADD_ITEMS_TO_COLLECTION, AUTHORS_SET_COLLECTION } from './type/mutation'
 
 export default <MutationTree<State>> {
     [AUTHORS_ADD_ITEMS_TO_COLLECTION](state: {[key: string]: any}, authors: {[key: string]: any}[]) {

@@ -1,12 +1,11 @@
 <template>
-    <v-layout row>
-        <AuthorsList :authors="authors"></AuthorsList>
-    </v-layout>
+    <AuthorsList :authors="authors"></AuthorsList>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import {AUTHORS_FETCH_COLLECTION} from "@/store/module/author/actionTypes";
+    import {AUTHORS_FETCH_COLLECTION} from "@/store/module/author/type/action";
+    import {AUTHOR_GET_COLLECTION} from "@/store/module/author/type/getter";
     import AuthorsList from "@/authors/component/AuthorsList.vue";
 
 
@@ -21,7 +20,7 @@
         }
 
         get authors () {
-            return this.$store.state.author.collection
+            return this.$store.getters[AUTHOR_GET_COLLECTION]
         }
     }
 </script>

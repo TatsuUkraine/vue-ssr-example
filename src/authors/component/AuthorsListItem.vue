@@ -7,10 +7,14 @@
 <script lang="ts">
     import {Component, Prop, Vue} from 'vue-property-decorator';
 
-    @Component
+    @Component({
+        props: {
+            authors: Object
+        },
+    })
     export default class AuthorsListItem extends Vue {
-        @Prop({default: {}})
-        author: any
+        @Prop()
+        author: any;
 
         get name () {
             return this.author.attributes.name;

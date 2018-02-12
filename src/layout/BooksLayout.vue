@@ -1,13 +1,12 @@
 <template>
-    <v-layout row>
-        <BooksList :books="books"></BooksList>
-    </v-layout>
+    <BooksList :books="books"></BooksList>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import {BOOKS_FETCH_COLLECTION} from "@/store/module/book/actionTypes";
+    import {BOOKS_FETCH_COLLECTION} from "@/store/module/book/type/action";
     import BooksList from "@/books/component/BooksList.vue";
+    import {BOOK_GET_COLLECTION} from "@/store/module/book/type/getter";
 
     @Component({
         components: {
@@ -20,7 +19,7 @@
         }
 
         get books () {
-            return this.$store.state.book.collection
+            return this.$store.getters[BOOK_GET_COLLECTION]
         }
     }
 </script>
