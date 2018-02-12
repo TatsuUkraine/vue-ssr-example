@@ -1,9 +1,9 @@
-import { AxiosHttp } from '@/service'
+import { Http } from '@/service'
 import AuthorAPI from './Authors'
 import BooksAPI from './Books'
 
-const Authors = new AuthorAPI(AxiosHttp);
-const Books = new BooksAPI(AxiosHttp);
+const Authors = new AuthorAPI(Http);
+const Books = new BooksAPI(Http);
 
 export {
     Authors,
