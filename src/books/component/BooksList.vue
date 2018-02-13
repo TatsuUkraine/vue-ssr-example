@@ -7,11 +7,11 @@
     </v-list>
 </template>
 
-<script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
+<script>
     import BooksListItem from './BooksListItem.vue';
+    import Vue from 'vue';
 
-    @Component({
+    export default Vue.extend({
         props: {
             books: Array
         },
@@ -19,7 +19,6 @@
             BooksListItem
         }
     })
-    export default class BooksList extends Vue {}
 </script>
 
 <style scoped>

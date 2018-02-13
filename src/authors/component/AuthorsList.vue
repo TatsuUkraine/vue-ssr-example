@@ -7,11 +7,11 @@
     </v-list>
 </template>
 
-<script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
+<script>
+    import Vue from 'vue';
     import AuthorListItem from './AuthorsListItem.vue';
 
-    @Component({
+    export default Vue.extend({
         props: {
             authors: Array
         },
@@ -19,7 +19,6 @@
             AuthorListItem
         }
     })
-    export default class AuthorsList extends Vue {}
 </script>
 
 <style scoped>

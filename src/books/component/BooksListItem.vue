@@ -4,18 +4,20 @@
     </v-list-tile-content>
 </template>
 
-<script lang="ts">
-    import {Component, Prop, Vue} from 'vue-property-decorator';
+<script>
+    import Vue from 'vue';
 
-    @Component
-    export default class BooksListItem extends Vue {
-        @Prop({default: {}})
-        book: any
+    export default Vue.extend({
+        props: {
+            book: Object
+        },
 
-        get title () {
-            return this.book.attributes.title;
+        computed: {
+            title () {
+                return this.book.attributes.title;
+            }
         }
-    }
+    })
 </script>
 
 <style scoped>

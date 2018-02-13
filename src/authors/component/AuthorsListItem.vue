@@ -4,22 +4,20 @@
     </v-list-tile-content>
 </template>
 
-<script lang="ts">
-    import {Component, Prop, Vue} from 'vue-property-decorator';
+<script>
+    import Vue from 'vue';
 
-    @Component({
+    export default Vue.extend({
         props: {
-            authors: Object
+            author: Object
         },
-    })
-    export default class AuthorsListItem extends Vue {
-        @Prop()
-        author: any;
 
-        get name () {
-            return this.author.attributes.name;
+        computed: {
+            name () {
+                return this.author.attributes.name;
+            }
         }
-    }
+    })
 </script>
 
 <style scoped>

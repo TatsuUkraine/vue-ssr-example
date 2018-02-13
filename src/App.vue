@@ -12,17 +12,16 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from 'vue-property-decorator';
+    import Vue from 'vue';
     import Navigation from '@/component/Navigation.vue'; // @ is an alias to /src
     import Layout from '@/layout/Layout.vue';
 
-    @Component({
+    export default Vue.extend({
         components: {
             Navigation,
             Layout
-        },
+        }
     })
-    export default class App extends Vue {}
 </script>
 
 
