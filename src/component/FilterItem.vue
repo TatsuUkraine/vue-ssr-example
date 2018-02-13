@@ -4,7 +4,7 @@
             <v-checkbox v-model="checked"></v-checkbox>
         </v-list-tile-action>
         <v-list-tile-content>
-            <v-list-tile-title>{{title}}</v-list-tile-title>
+            <v-list-tile-title>{{title}} ({{count}})</v-list-tile-title>
         </v-list-tile-content>
     </div>
 </template>
@@ -46,6 +46,10 @@
 
         get title () {
             return this.filter.title;
+        }
+
+        get count () {
+            return this.filter.count;
         }
 
     }
