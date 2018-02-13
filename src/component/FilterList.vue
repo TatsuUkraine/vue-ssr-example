@@ -10,7 +10,6 @@
 <script lang="ts">
     import {Vue, Component, Watch, Prop} from "vue-property-decorator";
     import FilterItem from "./FilterItem.vue";
-    import {Location} from 'vue-router';
     import {FILTERS_SET_SELECTED_FROM_REQUEST} from "../store/module/filter/type/action";
 
     @Component({
@@ -30,7 +29,7 @@
         }
 
         @Watch('$route')
-        onRouteUpdate (to: Location) {
+        onRouteUpdate (to: {[key: string]: any}) {
             this.$store.dispatch(FILTERS_SET_SELECTED_FROM_REQUEST, to.query);
         }
 
