@@ -12,7 +12,7 @@
 <script lang="ts">
     import {Vue, Component, Prop, Watch} from "vue-property-decorator";
     import {FILTER_IS_SELECTED} from "../store/module/filter/type/getter";
-    import {FILTERS_ADD_SELECTED, FILTERS_REMOVE_SELECTED} from "../store/module/filter/type/mutation";
+    import {FILTERS_ADD_SELECTED, FILTERS_REMOVE_SELECTED} from "../store/module/filter/type/action";
 
     @Component({
         props: {
@@ -26,7 +26,7 @@
 
         get checked() {
             return this.$store.getters[FILTER_IS_SELECTED]({
-                filter: this.filter.name,
+                filter: this.filter.type,
                 id: this.filter.id
             });
         }
@@ -38,8 +38,8 @@
                 action = FILTERS_REMOVE_SELECTED;
             }
 
-            this.$store.commit(action, {
-                filter: this.filter.name,
+            this.$store.dispatch(action, {
+                filter: this.filter.type,
                 id: this.filter.id
             });
         }

@@ -58,6 +58,7 @@ export default <MutationTree<State>> {
                 id: parseInt(include.id),
                 name: name,
                 title: title,
+                type: 'books',
                 count: 0
             };
 
@@ -68,7 +69,6 @@ export default <MutationTree<State>> {
         }
 
         state.collection = collection;
-        state.selected = {};
     },
 
     [FILTERS_SET_FROM_AUTHOR_INCLUDES](state: State, data: {[key: string]: any}) {
@@ -84,6 +84,7 @@ export default <MutationTree<State>> {
                 id: parseInt(include.id),
                 name: name,
                 title: title,
+                type: 'authors',
                 count: 0
             };
 
@@ -94,6 +95,5 @@ export default <MutationTree<State>> {
         }
 
         state.collection = collection;
-        state.selected = {};
     }
 }
