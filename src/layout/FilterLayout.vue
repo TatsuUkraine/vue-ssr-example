@@ -8,21 +8,20 @@
 </template>
 
 <script lang="ts">
-    import {Vue, Component, Watch, Prop} from "vue-property-decorator";
-    import FilterItem from "./FilterItem.vue";
-    import {FILTERS_SET_SELECTED_FROM_REQUEST} from "../store/module/filter/type/action";
+    import {Vue, Component, Watch} from "vue-property-decorator";
+    import FilterItem from "@/component/FilterItem.vue";
+    import {FILTERS_SET_SELECTED_FROM_REQUEST} from "@/store/module/filter/type/action";
+    import {FILTER_GET_COLLECTION} from "@/store/module/filter/type/getter";
 
     @Component({
-        props: {
-            filters: Array
-        },
         components: {
             FilterItem
         }
     })
-    export default class FilterList extends Vue {
-        @Prop()
-        filters: any
+    export default class FilterLayout extends Vue {
+        get filters () {
+            return this.$store.getters[FILTER_GET_COLLECTION];
+        }
 
         created () {
             this.$store.dispatch(FILTERS_SET_SELECTED_FROM_REQUEST, this.$route.query);

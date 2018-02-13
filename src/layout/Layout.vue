@@ -1,7 +1,7 @@
 <template>
     <v-layout row>
         <v-flex xs4>
-            <FilterList :filters="filters"/>
+            <router-view name="sidebar"></router-view>
         </v-flex>
         <v-flex xs8>
             <router-view></router-view>
@@ -10,20 +10,10 @@
 </template>
 
 <script lang="ts">
-    import {Vue, Component, Watch} from "vue-property-decorator";
-    import FilterList from "@/component/FilterList.vue";
-    import {FILTER_GET_COLLECTION} from "../store/module/filter/type/getter";
+    import {Vue, Component} from "vue-property-decorator";
 
-    @Component({
-        components: {
-            FilterList
-        }
-    })
-    export default class Layout extends Vue {
-        get filters () {
-            return this.$store.getters[FILTER_GET_COLLECTION];
-        }
-    }
+    @Component
+    export default class Layout extends Vue {}
 </script>
 
 <style scoped>
