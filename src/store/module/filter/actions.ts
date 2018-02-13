@@ -14,15 +14,11 @@ import {AUTHORS_FILTER_COLLECTION} from "@/store/module/author/type/mutation";
 export default <ActionTree<State, any>> {
     [FILTERS_ACTION_ADD_SELECTED]({ commit, state }: ActionContext<State, any>, data: {[key: string]: any} ) {
         commit(FILTERS_ADD_SELECTED, data);
-        commit(BOOKS_FILTER_COLLECTION, state.selected.authors || []);
-        commit(AUTHORS_FILTER_COLLECTION, state.selected.books || []);
         router.push({query: FilterParamGenerator.generateParamsFromFilters(state.selected)});
     },
 
     [FILTERS_ACTION_REMOVE_SELECTED]({ commit, state }: ActionContext<State, any>, data: {[key: string]: any} ) {
         commit(FILTERS_REMOVE_SELECTED, data);
-        commit(BOOKS_FILTER_COLLECTION, state.selected.authors || []);
-        commit(AUTHORS_FILTER_COLLECTION, state.selected.books || []);
         router.push({query: FilterParamGenerator.generateParamsFromFilters(state.selected)});
     },
 
