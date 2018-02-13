@@ -1,7 +1,7 @@
 <template>
     <v-toolbar light>
         <v-toolbar-title>PU Search</v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer/>
         <v-toolbar-items>
             <v-btn flat :to="{name: 'authors'}">
                 Authors
