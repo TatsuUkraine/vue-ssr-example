@@ -18,4 +18,18 @@ export default class RouteGenerator {
             filters: filterQuery.join(',')
         };
     }
+
+    generateFiltersFromRequest (query: {[key: string]: string}): {[key: string]: number[]} {
+        if (!query.filters) {
+            return {};
+        }
+
+        let [filter, ids] = query.filters.split('==');
+
+        return {
+            [filter]: ids.split(',').map(function (item: string) {
+                return parseInt(item);
+            })
+        }
+    }
 }

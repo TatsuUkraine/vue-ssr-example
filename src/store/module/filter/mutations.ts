@@ -4,8 +4,9 @@ import {
     FILTERS_ADD_SELECTED,
     FILTERS_REMOVE_SELECTED,
     FILTERS_SET_COLLECTION, FILTERS_SET_FROM_AUTHOR_INCLUDES,
-    FILTERS_SET_FROM_BOOK_INCLUDES
+    FILTERS_SET_FROM_BOOK_INCLUDES, FILTERS_SET_SELECTED_FROM_REQUEST
 } from './type/mutation'
+import {FilterParamGenerator} from "@/service";
 
 const Helpers = {
     getTitle: (title: string): string => { return title.toLowerCase().replace(/[\,,\s]/g, ''); },
@@ -43,6 +44,11 @@ export default <MutationTree<State>> {
             return id !== selectedId;
         });
         state.selected = {...state.selected, [filter]: selectedFilters};
+    },
+
+    [FILTERS_SET_SELECTED_FROM_REQUEST](state: State, query: {[key: string]: string}) {
+        let filter = FilterParamGenerator.generateFiltersFromRequest(query);
+        state.selected = filter;
     },
 
     [FILTERS_SET_FROM_BOOK_INCLUDES](state: State, data: {[key: string]: any}) {
