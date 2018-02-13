@@ -47,8 +47,7 @@ export default <MutationTree<State>> {
     },
 
     [FILTERS_SET_SELECTED_FROM_REQUEST](state: State, query: {[key: string]: string}) {
-        let filter = FilterParamGenerator.generateFiltersFromRequest(query);
-        state.selected = filter;
+        state.selected = FilterParamGenerator.generateFiltersFromRequest(query);
     },
 
     [FILTERS_SET_FROM_BOOK_INCLUDES](state: State, data: {[key: string]: any}) {
@@ -64,7 +63,7 @@ export default <MutationTree<State>> {
                 id: parseInt(include.id),
                 name: name,
                 title: title,
-                type: 'books',
+                type: 'authors',
                 count: 0
             };
 
@@ -90,7 +89,7 @@ export default <MutationTree<State>> {
                 id: parseInt(include.id),
                 name: name,
                 title: title,
-                type: 'authors',
+                type: 'books',
                 count: 0
             };
 

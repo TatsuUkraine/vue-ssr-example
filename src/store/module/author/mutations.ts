@@ -1,6 +1,6 @@
 import { MutationTree } from 'vuex'
 import { State } from './state'
-import { AUTHORS_ADD_ITEMS_TO_COLLECTION, AUTHORS_SET_COLLECTION } from './type/mutation'
+import {AUTHORS_ADD_ITEMS_TO_COLLECTION, AUTHORS_FILTER_COLLECTION, AUTHORS_SET_COLLECTION} from './type/mutation'
 
 export default <MutationTree<State>> {
     [AUTHORS_ADD_ITEMS_TO_COLLECTION](state: {[key: string]: any}, authors: {[key: string]: any}[]) {
@@ -23,6 +23,19 @@ export default <MutationTree<State>> {
 
     [AUTHORS_SET_COLLECTION](state: {[key: string]: any}, authors: {[key: string]: any}[]) {
         state.collection = [...authors];
+    },
+
+    [AUTHORS_FILTER_COLLECTION](state: State, bookIds: number[]) {
+        if (!bookIds.length) {
+            state.filteredCollection = [...state.collection];
+            return;
+        }
+
+        state.filteredCollection = state.collection.filter(function (author: {[key: string]: any}) {
+            return !!author.relationships.books.data.find(function (book: {[key: string]: string}) {
+                return bookIds.indexOf(parseInt(book.id)) !== -1;
+            });
+        });
     }
 
 }
