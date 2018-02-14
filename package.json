@@ -28,7 +28,7 @@
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.13",
-    "vuetify": "^0.17.7",
+    "vuetify": "^1.0.0",
     "vuex": "^3.0.1",
     "fork-ts-checker-webpack-plugin": "latest",
     "dotenv": "latest"

@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
-    <v-app>
-      <Navigation></Navigation>
-      <v-content>
-        <v-container fluid>
-          <Layout/>
-        </v-container>
-      </v-content>
-    </v-app>
-  </div>
+  <v-app>
+    <Navigation></Navigation>
+    <v-content>
+      <v-container fluid>
+        <Layout/>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script lang="ts">

@@ -6,8 +6,8 @@ import { AUTHORS_FETCH_COLLECTION } from './type/action'
 import {FILTERS_SET_FROM_AUTHOR_INCLUDES} from "@/store/module/filter/type/mutation";
 
 export default <ActionTree<State, any>> {
-    [AUTHORS_FETCH_COLLECTION]({ commit, rootState }: ActionContext<State, any> ) {
-        Authors.getCollection({include: 'books'}).then((response) => {
+    [AUTHORS_FETCH_COLLECTION]({ commit, rootState }: ActionContext<State, any> ): Promise<void> {
+        return Authors.getCollection({include: 'books'}).then((response) => {
             commit(AUTHORS_SET_COLLECTION, response.data.data);
             commit(FILTERS_SET_FROM_AUTHOR_INCLUDES, response.data);
             commit(AUTHORS_FILTER_COLLECTION, rootState.filter.selected.books || []);

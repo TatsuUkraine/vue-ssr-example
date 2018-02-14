@@ -8,9 +8,9 @@
     import BooksList from "@/books/component/BooksList.vue";
     import {BOOK_GET_FILTERED_COLLECTION} from "@/store/module/book/type/getter";
 
-    export default Vue.extend({
-        mounted () {
-            this.$store.dispatch(BOOKS_FETCH_COLLECTION);
+    export default {
+        asyncData ({store}) {
+            return store.dispatch(BOOKS_FETCH_COLLECTION);
         },
 
         computed: {
@@ -22,5 +22,5 @@
         components: {
             BooksList
         }
-    })
+    }
 </script>

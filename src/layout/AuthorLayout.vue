@@ -9,8 +9,8 @@
     import AuthorsList from "@/authors/component/AuthorsList.vue";
 
     export default Vue.extend({
-        mounted () {
-            this.$store.dispatch(AUTHORS_FETCH_COLLECTION);
+        asyncData ({store}) {
+            return store.dispatch(AUTHORS_FETCH_COLLECTION);
         },
 
         computed: {

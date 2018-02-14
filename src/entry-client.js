@@ -1,23 +1,11 @@
-import Vue from 'vue'
 import { createApp } from './main'
 
-// a global mixin that calls `asyncData` when a route component's params change
-Vue.mixin({
-    beforeRouteUpdate (to, from, next) {
-        const { asyncData } = this.$options
-        if (asyncData) {
-            asyncData({
-                store: this.$store,
-                route: to
-            }).then(next).catch(next)
-        } else {
-            next()
-        }
-    }
-})
 
 const { app, router, store } = createApp()
 
+if (window.__INITIAL_STATE__) {
+    store.replaceState(window.__INITIAL_STATE__)
+}
 // wait until router has resolved all async before hooks
 // and async components...
 router.onReady(() => {
@@ -32,7 +20,9 @@ router.onReady(() => {
         const activated = matched.filter((c, i) => {
             return diffed || (diffed = (prevMatched[i] !== c))
         })
-        const asyncDataHooks = activated.map(c => c.asyncData).filter(_ => _)
+        const asyncDataHooks = activated.map(c => {
+            return c.asyncData || c.options && c.options.asyncData;
+        }).filter(_ => _)
         if (!asyncDataHooks.length) {
             return next()
         }
