@@ -7,8 +7,12 @@ import vuetify from 'vuetify'
 Vue.config.productionTip = false
 Vue.use(vuetify)
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+export function createApp () {
+    const app = new Vue({
+        router,
+        store,
+        render: h => h(App)
+    });
+
+    return { app, router, store };
+}
