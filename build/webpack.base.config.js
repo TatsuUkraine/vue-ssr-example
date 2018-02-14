@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const vueConfig = require('./vue-loader.config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
@@ -18,7 +19,8 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'public': path.resolve(__dirname, '../public')
+            'public': path.resolve(__dirname, '../public'),
+            '@': path.resolve(__dirname, '../src')
         },
         extensions: ['.ts', '.tsx', '.js']
     },
@@ -51,6 +53,14 @@ module.exports = {
                         fallback: 'vue-style-loader'
                     })
                     : ['vue-style-loader', 'css-loader']
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: {
+                    // disable type checker - we will use it in fork plugin
+                    transpileOnly: true
+                }
             }
         ]
     },
@@ -67,10 +77,12 @@ module.exports = {
             new ExtractTextPlugin({
                 filename: 'common.[chunkhash].css'
             }),
-            new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true})
+            new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true}),
+            new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')})
         ]
         : [
             new FriendlyErrorsPlugin(),
-            new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true})
+            new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true}),
+            new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')})
         ]
 }
