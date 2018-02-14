@@ -2,16 +2,18 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
+const config = require('./env-loader')({
+    VUE_ENV: 'client'
+})
 
-const config = merge(base, {
+module.exports = merge(base, {
     entry: {
         app: './src/entry-client.js'
     },
     plugins: [
         // strip dev-only code in Vue source
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-            'process.env.VUE_ENV': '"client"'
+            'process.env': config
         }),
         // extract vendor chunks for better caching
         new webpack.optimize.CommonsChunkPlugin({
@@ -34,5 +36,3 @@ const config = merge(base, {
         new VueSSRClientPlugin()
     ]
 })
-
-module.exports = config

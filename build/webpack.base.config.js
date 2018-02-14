@@ -5,16 +5,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const config = require('./env-loader');
 
 const isProd = process.env.NODE_ENV === 'production'
 
 let plugins = [
     new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true}),
-    new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')}),
-    new webpack.DefinePlugin({
-        'process.env': config
-    })
+    new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')})
 ];
 
 if (isProd) {
