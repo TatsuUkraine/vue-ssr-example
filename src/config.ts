@@ -6,12 +6,11 @@ class ConfigManager {
     }
 
     get API_BASE_URL(): string {
-        return this.prop['VUE_APP_API_BASE_URL']
+        return this.prop['API_BASE_URL']
     }
 
     get DEBUG(): boolean {
-        return this.prop['VUE_APP_DEBUG']
+        return this.prop['DEBUG']
     }
 }
-
 export default new ConfigManager(process.env);

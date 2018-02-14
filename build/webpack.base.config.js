@@ -5,8 +5,34 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
+const config = require('./env-loader');
 
 const isProd = process.env.NODE_ENV === 'production'
+
+let plugins = [
+    new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true}),
+    new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')}),
+    new webpack.DefinePlugin({
+        'process.env': config
+    })
+];
+
+if (isProd) {
+    plugins = [
+        ...plugins,
+        ...[
+            new webpack.optimize.UglifyJsPlugin({
+                compress: { warnings: false }
+            }),
+            new webpack.optimize.ModuleConcatenationPlugin(),
+            new ExtractTextPlugin({
+                filename: 'common.[chunkhash].css'
+            })
+        ]
+    ];
+} else {
+    plugins.push(new FriendlyErrorsPlugin());
+}
 
 module.exports = {
     devtool: isProd
@@ -68,21 +94,5 @@ module.exports = {
         maxEntrypointSize: 300000,
         hints: isProd ? 'warning' : false
     },
-    plugins: isProd
-        ? [
-            new webpack.optimize.UglifyJsPlugin({
-                compress: { warnings: false }
-            }),
-            new webpack.optimize.ModuleConcatenationPlugin(),
-            new ExtractTextPlugin({
-                filename: 'common.[chunkhash].css'
-            }),
-            new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true}),
-            new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')})
-        ]
-        : [
-            new FriendlyErrorsPlugin(),
-            new ForkTsCheckerWebpackPlugin({tsconfig: path.resolve(__dirname, '../tsconfig.json'), vue: true}),
-            new TsconfigPathsPlugin({configFile: path.resolve(__dirname, '../tsconfig.json')})
-        ]
+    plugins: plugins
 }

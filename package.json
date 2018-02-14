@@ -30,7 +30,8 @@
     "vue-server-renderer": "^2.5.13",
     "vuetify": "^0.17.7",
     "vuex": "^3.0.1",
-    "fork-ts-checker-webpack-plugin": "latest"
+    "fork-ts-checker-webpack-plugin": "latest",
+    "dotenv": "latest"
   },
   "devDependencies": {
     "@types/jest": "^22.0.1",
@@ -45,6 +46,7 @@
     "babel-preset-env": "^1.6.1",
     "chokidar": "^2.0.1",
     "css-loader": "^0.28.9",
+    "dotenv-webpack": "^1.5.4",
     "file-loader": "^1.1.6",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "node-sass": "^4.7.2",
