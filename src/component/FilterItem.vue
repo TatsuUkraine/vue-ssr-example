@@ -10,11 +10,10 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import {FILTER_IS_SELECTED} from "../store/module/filter/type/getter";
     import {FILTERS_ADD_SELECTED, FILTERS_REMOVE_SELECTED} from "../store/module/filter/type/action";
 
-    export default Vue.extend({
+    export default {
         props: {
             filter: Object
         },
@@ -47,7 +46,7 @@
                 return this.filter.count;
             }
         }
-    })
+    }
 </script>
 
 <style scoped>

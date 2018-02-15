@@ -9,7 +9,7 @@
   </v-app>
 </template>
 
-<script lang="ts">
+<script>
     import Vue from 'vue';
     import Navigation from '@/component/Navigation.vue'; // @ is an alias to /src
     import Layout from '@/layout/Layout.vue';
