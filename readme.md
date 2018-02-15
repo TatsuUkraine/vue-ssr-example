@@ -61,3 +61,12 @@ Variables in default file can be changed with `.env.{environent}`, where
 `environment` defines based on NODE_ENV. For example,
 if NODE_ENV='development' bulder will try to load `.env.development`
 after `.env` file
+
+Alongside with custom variables in .env file you can also specify
+variables for server build. Default server target is **localhost:8080**
+even if variables in `.env` files wasn't defined
+
+```
+PORT=8080
+HOST=localhost
+```
