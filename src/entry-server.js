@@ -34,10 +34,7 @@ export default context => {
             // which is resolved when the action is complete and store state has been
             // updated.
             Promise.all(matchedComponents.map((c) => {
-                let asyncData = c.asyncData;
-                if (c.options && c.options.asyncData) {
-                    asyncData = c.options.asyncData;
-                }
+                let asyncData = c.asyncData || c.options && c.options.asyncData
                 return asyncData && asyncData({
                     store,
                     route: router.currentRoute

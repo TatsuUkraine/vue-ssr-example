@@ -6,6 +6,7 @@
     "jsx": "preserve",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    //"allowJs": true, //allow import JS files in TS files
     "sourceMap": true,
     "baseUrl": ".",
     "types": [

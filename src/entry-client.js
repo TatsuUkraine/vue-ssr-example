@@ -17,17 +17,46 @@ router.onReady(() => {
         const matched = router.getMatchedComponents(to)
         const prevMatched = router.getMatchedComponents(from)
         let diffed = false
+
         const activated = matched.filter((c, i) => {
             return diffed || (diffed = (prevMatched[i] !== c))
         })
+
         const asyncDataHooks = activated.map(c => {
-            return c.asyncData || c.options && c.options.asyncData;
+            let asyncData = c.asyncData || c.options && c.options.asyncData
+
+            if (asyncData) {
+                //if component has defined option 'waitAsyncData' define it in async hook list, default: true
+                let waitData = c.waitAsyncData
+
+                if (waitData === undefined) {
+                    waitData = c.options && c.options.waitAsyncData || true
+                }
+
+                return {
+                    asyncData: asyncData,
+                    waitAsyncData: !!waitData
+                }
+            }
+            return null;
         }).filter(_ => _)
+
         if (!asyncDataHooks.length) {
             return next()
         }
 
-        Promise.all(asyncDataHooks.map(hook => hook({ store, route: to })))
+        Promise
+            .all(asyncDataHooks.map((hook) => {
+                let promise = hook.asyncData({ store, route: to });
+
+                //if waitAsyncData !== false wait until asyncData promise will be resolved
+                if (hook.waitAsyncData) {
+                    return promise
+                }
+
+                //otherwise resolve it just now, and let component be mounted without data waiting
+                return Promise.resolve()
+            }))
             .then(() => {
                 next()
             })

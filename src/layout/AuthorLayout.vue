@@ -7,17 +7,16 @@
     import {AUTHORS_FETCH_COLLECTION} from "@/store/module/author/type/action";
     import {AUTHOR_GET_FILTERED_COLLECTION} from "@/store/module/author/type/getter";
     import AuthorsList from "@/authors/component/AuthorsList.vue";
+    import {mapGetters} from 'vuex';
 
     export default Vue.extend({
         asyncData ({store}) {
             return store.dispatch(AUTHORS_FETCH_COLLECTION);
         },
 
-        computed: {
-            authors () {
-                return this.$store.getters[AUTHOR_GET_FILTERED_COLLECTION]
-            }
-        },
+        computed: mapGetters({
+            authors: AUTHOR_GET_FILTERED_COLLECTION
+        }),
 
         components: {
             AuthorsList

@@ -11,6 +11,7 @@
     import FilterItem from "@/component/FilterItem.vue";
     import {FILTERS_SET_SELECTED_FROM_REQUEST} from "@/store/module/filter/type/action";
     import {FILTER_GET_COLLECTION} from "@/store/module/filter/type/getter";
+    import {mapGetters} from 'vuex';
 
     export default {
         created () {
@@ -18,9 +19,9 @@
         },
 
         computed: {
-            filters () {
-                return this.$store.getters[FILTER_GET_COLLECTION];
-            },
+            ...mapGetters({
+                filters: FILTER_GET_COLLECTION
+            }),
             title () {
                 let firstFilter = this.filters[0] || {type: ''};
                 return firstFilter.type;

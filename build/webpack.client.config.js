@@ -3,7 +3,9 @@ const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const config = require('./env-loader')({
-    VUE_ENV: 'client'
+    customConfig: {
+        VUE_ENV: 'client'
+    }
 })
 
 module.exports = merge(base, {

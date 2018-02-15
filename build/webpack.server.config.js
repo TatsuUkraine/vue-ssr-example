@@ -4,7 +4,9 @@ const base = require('./webpack.base.config')
 const nodeExternals = require('webpack-node-externals')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const config = require('./env-loader')({
-    VUE_ENV: 'server'
+    customConfig: {
+        VUE_ENV: 'server'
+    }
 })
 
 module.exports = merge(base, {

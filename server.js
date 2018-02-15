@@ -5,8 +5,10 @@ const express = require('express')
 const compression = require('compression')
 const resolve = file => path.resolve(__dirname, file)
 const { createBundleRenderer } = require('vue-server-renderer')
+const vhost = require('vhost')
+const config = require('./build/env-loader')({stringify: false});
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = config.NODE_ENV === 'production'
 const useMicroCache = process.env.MICRO_CACHE !== 'false'
 const serverInfo =
     `express/${require('express/package.json').version} ` +
@@ -65,7 +67,6 @@ app.use(compression({ threshold: 0 }))
 app.use('/dist', serve('./dist', true))
 app.use('/public', serve('./public', true))
 
-
 function render (req, res) {
     const s = Date.now()
 
@@ -100,11 +101,15 @@ function render (req, res) {
     })
 }
 
+const host = config.HOST || 'localhost'
+const port = config.PORT || 8080
+
+app.use(vhost(host, express.static( '/' )))
+
 app.get('*', isProd ? render : (req, res) => {
     readyPromise.then(() => render(req, res))
 })
 
-const port = process.env.PORT || 8080
 app.listen(port, () => {
-    console.log(`server started at localhost:${port}`)
+    console.log(`server started at ${host}:${port}`)
 })

@@ -3,31 +3,27 @@ const fs = require('fs')
 const dotenv = require('dotenv')
 const defaultConfig = dotenv.parse(fs.readFileSync(path.resolve(__dirname, '../.env')))
 
-module.exports = (customConfig = {}) => {
+module.exports = ({customConfig = {}, stringify = true}) => {
     let config = {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
+        NODE_ENV: process.env.NODE_ENV || 'development'
     };
 
-    for (let i in defaultConfig) {
-        if (defaultConfig.hasOwnProperty(i)) {
-            config[i] = JSON.stringify(defaultConfig[i]);
-        }
-    }
+    config = {...config, ...defaultConfig};
 
     try {
         const envConfig = dotenv.parse(fs.readFileSync(path.resolve(__dirname, `../.env.${config.NODE_ENV}`)))
-        for (let i in envConfig) {
-            if (envConfig.hasOwnProperty(i)) {
-                config[i] = JSON.stringify(envConfig[i]);
-            }
-        }
+        config = {...config, ...envConfig};
     } catch (e) {
 
     }
 
-    for (let i in customConfig) {
-        if (customConfig.hasOwnProperty(i)) {
-            config[i] = JSON.stringify(customConfig[i]);
+    config = {...config, ...customConfig};
+
+    if (stringify) {
+        for (let key in config) {
+            if (config.hasOwnProperty(key)) {
+                config[key] = JSON.stringify(config[key]);
+            }
         }
     }
 
