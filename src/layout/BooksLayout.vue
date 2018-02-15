@@ -9,6 +9,7 @@
     import {mapGetters} from 'vuex';
 
     export default {
+        waitAsyncData: false,
         asyncData ({store}) {
             return store.dispatch(BOOKS_FETCH_COLLECTION);
         },
