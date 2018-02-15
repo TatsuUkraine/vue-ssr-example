@@ -17,12 +17,24 @@ Store is split on modules in **/src/store**
 
 This project is configured with Webpack + Express.
 
-During server render App will wind matching Components by requested URL that has asyncData method.
+```vue
+<script>
+    export default {
+        waitAsyncData: false, //default: true
+        
+        asyncData () {
+            return new Promise((res, rej) => res())
+        }
+    }
+</script>
+```
+
+During server render App will find matching Components by requested URL that has asyncData method.
 
 Highly recommended make API requests to fetch data, that will be used in child components or layouts,
 in asyncData - to prepare all needed data, that you are going to use.
 
-**asyncData** should return Promise, that should be resolved after all data are ready for rendering.
+`asyncData` should return Promise, that should be resolved after fetched data are ready for rendering.
 
 Server won't continue rendering until all asyncData will be resolved
 
@@ -34,5 +46,18 @@ be loaded for new route
 
 As an option it can be switched off, but only for Client app with help of **waitAsyncData** flag.
 
-If **waitAsyncData** will be **FALSE** asyncData won't block app from navigation. It still won't 
-change anything during SSR.
+If **waitAsyncData** will be **FALSE** asyncData won't block app from navigation. It still will 
+stop rendering until Promise will be resolved.
+
+### .ENV
+
+You can modify environment variables, that will be exported in
+`process.env`.
+
+Default file `.env` should be placed in root folder. If needed path can be changed
+in `/build/env-loader.js`
+
+Variables in default file can be changed with `.env.{environent}`, where
+`environment` defines based on NODE_ENV. For example,
+if NODE_ENV='development' bulder will try to load `.env.development`
+after `.env` file
