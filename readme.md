@@ -34,5 +34,5 @@ be loaded for new route
 
 As an option it can be switched off, but only for Client app with help of **waitAsyncData** flag.
 
-If **waitAsyncData** will be **FALSE** asyncData won't block app from navigation. It still won't affect
+If **waitAsyncData** will be **FALSE** asyncData won't block app from navigation. It still won't 
 change anything during SSR.
