@@ -2,18 +2,18 @@
 
 Inspired by [Vue SSR](https://ssr.vuejs.org/en) and [Evan You example](https://github.com/vuejs/vue-hackernews-2.0)
 
-### API
+## API
 
 This project uses [JSON API](http://jsonapiplayground.reyesoft.com/) playground that was made according to [JSON API Spec](http://jsonapi.org/)
 API layer is placed in **/src/api** folder (according to suggestions from Vuex doc)
 
 API layer uses Axios (implementation is in **/src/service**) transport to make requests over HTTP
 
-### Vuex
+## Vuex
 
 Store is split on modules in **/src/store**
 
-### SSR
+## SSR
 
 This project is configured with Webpack + Express.
 
@@ -29,10 +29,12 @@ This project is configured with Webpack + Express.
 </script>
 ```
 
-During server render App will find matching Components by requested URL that has asyncData method.
+During server rendering, App will find matching Components by requested URL that has asyncData method.
 
-Highly recommended make API requests to fetch data, that will be used in child components or layouts,
-in asyncData - to prepare all needed data, that you are going to use.
+### Highly resomended
+Make API requests to fetch data, that will be used in child components or layouts,
+in `asyncData` - to prepare all needed data, that you are going to use. It will prevent you
+from problems when SSR rendered page and Client rendered page will be contains different result.
 
 `asyncData` should return Promise, that should be resolved after fetched data are ready for rendering.
 
@@ -49,7 +51,7 @@ As an option it can be switched off, but only for Client app with help of **wait
 If **waitAsyncData** will be **FALSE** asyncData won't block app from navigation. It still will 
 stop rendering until Promise will be resolved.
 
-### .ENV
+## .ENV
 
 You can modify environment variables, that will be exported in
 `process.env`.
@@ -70,3 +72,50 @@ even if variables in `.env` files wasn't defined
 PORT=8080
 HOST=localhost
 ```
+
+## TypeScript
+
+In this example you can use ES6 style in `*.vue` alongside
+with `*.ts` imports. TS support was configured to prevent using regular
+`*.js` files inside TS files (you still can import `.vue` components inside TS files).
+ But it can be changed easily in `tsconfig.json`
+file. In same time `*.ts` files can be imported anywhere (JS or Vue file)
+
+Vue components doesn't use TS since it's overcomplicated in my opinion.
+But it can be changed if needed just with [Vue Class Component](https://github.com/vuejs/vue-class-component) package
+
+## Jest
+
+This example uses Jest for testing. In general it was used, just to get full stack example of project)
+Test files are placed in `/test` folder. You can run tests with
+
+``` bash
+npm run test
+```
+
+This test example was built based on `@vue/cli`
+
+## Build setup
+
+**Requires Node.js 7+**
+
+``` bash
+# install dependencies
+npm install # or yarn
+
+# serve in dev mode, with hot reload at localhost:8080
+npm run dev
+
+# build for production
+npm run build
+
+# serve in production mode
+npm start
+
+# run tests
+npm run test
+```
+
+## License
+
+MIT
