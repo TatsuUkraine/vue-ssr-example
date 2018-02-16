@@ -61,16 +61,30 @@ in `/build/env-loader.js`
 
 Variables in default file can be changed with `.env.{environent}`, where
 `environment` defines based on NODE_ENV. For example,
-if NODE_ENV='development' bulder will try to load `.env.development`
+if NODE_ENV='development' builder will try to load `.env.development`
 after `.env` file
+
+Properties `VUE_ENV` and `NODE_ENV` in `.env` files will be ignored
+
+Also you can create files with `.local` postfix (`.env.local`, `.env.{environent}.local`). Such files will be loaded last.
+They are added to GitIgnore so you can use them as local config files
 
 Alongside with custom variables in .env file you can also specify
 variables for server build. Default server target is **localhost:8080**
-even if variables in `.env` files wasn't defined
+even, if variables in `.env` files wasn't defined
 
 ```
 PORT=8080
 HOST=localhost
+```
+
+Default `process.env` object that will be available in you app after build
+
+```json
+{ 
+    "NODE_ENV": "development",
+    "VUE_ENV": "client" // "server"
+}
 ```
 
 ## TypeScript
