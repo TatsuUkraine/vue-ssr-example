@@ -6,11 +6,27 @@ class ConfigManager {
     }
 
     get API_BASE_URL(): string {
-        return this.prop['VUE_APP_API_BASE_URL']
+        return this.prop['API_BASE_URL']
     }
 
     get DEBUG(): boolean {
-        return this.prop['VUE_APP_DEBUG']
+        return this.prop['DEBUG']
+    }
+
+    get VUE_ENV (): string {
+        return this.prop['VUE_ENV'];
+    }
+
+    get ENV (): boolean {
+        return this.prop['NODE_ENV']
+    }
+
+    get isSSR (): boolean {
+        return this.VUE_ENV === 'server'
+    }
+
+    get PROGRESS_BAR_COLOR (): string {
+        return '#ffca2b'
     }
 }
 

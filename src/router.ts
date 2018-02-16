@@ -1,22 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import About from './views/About.vue'
+import AuthorLayout from '@/layout/AuthorLayout.vue'
+import BooksLayout from '@/layout/BooksLayout.vue'
+import FilterLayout from '@/layout/FilterLayout.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: About
-    }
-  ]
+    mode: 'history',
+    routes: [
+        {
+            path: '/authors',
+            name: 'authors',
+            components: { default: AuthorLayout, sidebar: FilterLayout }
+        },
+        {
+            path: '/books',
+            name: 'books',
+            components: { default: BooksLayout, sidebar: FilterLayout }
+        },
+    ]
 })
