@@ -1,5 +1,11 @@
+import Vue from 'vue'
+import 'es6-promise/auto'
 import { createApp } from './main'
+import ProgressBar from '@/component/ProgressBar.vue'
 
+// global progress bar
+const progressBar = Vue.prototype.$progressBar = new Vue(ProgressBar).$mount()
+document.body.appendChild(progressBar.$el)
 
 const { app, router, store } = createApp()
 
@@ -45,6 +51,7 @@ router.onReady(() => {
             return next()
         }
 
+        progressBar.start();
         Promise
             .all(asyncDataHooks.map((hook) => {
                 let promise = hook.asyncData({ store, route: to });
@@ -58,9 +65,13 @@ router.onReady(() => {
                 return Promise.resolve()
             }))
             .then(() => {
+                progressBar.finish()
                 next()
             })
-            .catch(next)
+            .catch(() => {
+                progressBar.fail()
+                next()
+            })
     })
 
     // actually mount to DOM

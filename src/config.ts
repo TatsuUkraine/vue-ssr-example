@@ -24,6 +24,10 @@ class ConfigManager {
     get isSSR (): boolean {
         return this.VUE_ENV === 'server'
     }
+
+    get PROGRESS_BAR_COLOR (): string {
+        return '#ffca2b'
+    }
 }
 
 export default new ConfigManager(process.env);
