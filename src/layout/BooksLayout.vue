@@ -7,11 +7,16 @@
     import BooksList from "@/books/component/BooksList.vue";
     import {BOOK_GET_FILTERED_COLLECTION} from "@/store/module/book/type/getter";
     import {mapGetters} from 'vuex';
+    import {DocumentHeaderMixing} from "@/mixin"
 
     export default {
         waitAsyncData: false,
         asyncData ({store}) {
             return store.dispatch(BOOKS_FETCH_COLLECTION);
+        },
+
+        metaInfo: {
+            title: 'BookTitle',
         },
 
         computed: mapGetters({
@@ -20,6 +25,7 @@
 
         components: {
             BooksList
-        }
+        },
+        mixins: [DocumentHeaderMixing.getProperties()]
     }
 </script>

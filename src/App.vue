@@ -10,16 +10,15 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import Navigation from '@/component/Navigation.vue'; // @ is an alias to /src
     import Layout from '@/layout/Layout.vue';
 
-    export default Vue.extend({
+    export default {
         components: {
             Navigation,
             Layout
         }
-    })
+    }
 </script>
 
 

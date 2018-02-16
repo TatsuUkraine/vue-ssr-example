@@ -3,15 +3,19 @@
 </template>
 
 <script>
-    import Vue  from 'vue';
     import {AUTHORS_FETCH_COLLECTION} from "@/store/module/author/type/action";
     import {AUTHOR_GET_FILTERED_COLLECTION} from "@/store/module/author/type/getter";
     import AuthorsList from "@/authors/component/AuthorsList.vue";
     import {mapGetters} from 'vuex';
+    import {DocumentHeaderMixing} from '@/mixin'
 
-    export default Vue.extend({
+    export default {
         asyncData ({store}) {
             return store.dispatch(AUTHORS_FETCH_COLLECTION);
+        },
+
+        metaInfo: {
+            title: 'AuthorTitle',
         },
 
         computed: mapGetters({
@@ -20,6 +24,7 @@
 
         components: {
             AuthorsList
-        }
-    })
+        },
+        mixins: [DocumentHeaderMixing.getProperties()]
+    }
 </script>
