@@ -7,7 +7,8 @@
     import BooksList from "@/books/component/BooksList.vue";
     import {BOOK_GET_FILTERED_COLLECTION} from "@/store/module/book/type/getter";
     import {mapGetters} from 'vuex';
-    import {DocumentHeaderMixing} from "@/mixin"
+    import {DocumentHeaderMixin} from "@/mixin"
+    import {mapMixins} from "@/util";
 
     export default {
         waitAsyncData: false,
@@ -26,6 +27,8 @@
         components: {
             BooksList
         },
-        mixins: [DocumentHeaderMixing.getProperties()]
+        mixins: mapMixins(
+            DocumentHeaderMixin
+        )
     }
 </script>

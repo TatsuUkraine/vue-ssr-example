@@ -5,7 +5,7 @@ export default class ClientDocumentHeaderMixin implements VueMixin {
     private setMetaInfo(): void {
         const componentMeta = new ComponentMetaParser(this)
         if (componentMeta.hasMeta()) {
-            document.title = `Vue HN 2.0 | ${componentMeta.getTitle()}`
+            document.title = `${componentMeta.getTitle()}`
         }
     }
 

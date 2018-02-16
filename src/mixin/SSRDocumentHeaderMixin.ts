@@ -6,7 +6,7 @@ export default class SSRDocumentHeaderMixin implements VueMixin {
     private setMetaInfo(): void {
         const componentMeta = new ComponentMetaParser(this)
         if (componentMeta.hasMeta()) {
-            this.$ssrContext.title = `Vue HN 2.0 | ${componentMeta.getTitle()}`
+            this.$ssrContext.title = `${componentMeta.getTitle()}`
         }
     }
 

@@ -7,7 +7,8 @@
     import {AUTHOR_GET_FILTERED_COLLECTION} from "@/store/module/author/type/getter";
     import AuthorsList from "@/authors/component/AuthorsList.vue";
     import {mapGetters} from 'vuex';
-    import {DocumentHeaderMixing} from '@/mixin'
+    import {DocumentHeaderMixin} from '@/mixin'
+    import {mapMixins} from '@/util'
 
     export default {
         asyncData ({store}) {
@@ -25,6 +26,8 @@
         components: {
             AuthorsList
         },
-        mixins: [DocumentHeaderMixing.getProperties()]
+        mixins: mapMixins(
+            DocumentHeaderMixin
+        )
     }
 </script>
