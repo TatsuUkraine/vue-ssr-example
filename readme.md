@@ -111,19 +111,41 @@ This test example was built based on `@vue/cli`
 
 If you're using SSR then you probably need it for SEO. Question is - how to manage page headers (title, meta and etc.)
 
-For this purpose you can use mixin `DocumentHeaderMixing`. It's a raw example, probably you will want to use
+For this purpose you can use mixin `DocumentHeaderMixin`. It's a raw example, probably you will want to use
 other packages that Vue
 
 ```vue
 
 <script>
-    import {DocumentHeaderMixing} from "@/mixin"
+    import {DocumentHeaderMixin} from "@/mixin"
+    
 
     export default {
         metaInfo: {
             title: 'BookTitle',
         },
-        mixins: [DocumentHeaderMixing.getProperties()]
+        mixins: [DocumentHeaderMixin.getProperties()]
+    }
+</script>
+
+```
+
+or with using `mapMixins`
+
+```vue
+
+<script>
+    import {DocumentHeaderMixin} from "@/mixin"
+    import {mapMixins} from "@/util"
+    
+
+    export default {
+        metaInfo: {
+            title: 'BookTitle',
+        },
+        mixins: mapMixins(
+            DocumentHeaderMixin.getProperties()
+        )
     }
 </script>
 
