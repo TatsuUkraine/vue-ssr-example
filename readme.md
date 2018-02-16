@@ -144,7 +144,7 @@ or with using `mapMixins`
             title: 'BookTitle',
         },
         mixins: mapMixins(
-            DocumentHeaderMixin.getProperties()
+            DocumentHeaderMixin
         )
     }
 </script>
