@@ -80,11 +80,9 @@ HOST=localhost
 
 Default `process.env` object that will be available in you app after build
 
-```json
-{ 
-    "NODE_ENV": "development",
-    "VUE_ENV": "client" // "server"
-}
+```typescript
+NODE_ENV: 'development'
+VUE_ENV: 'client' // or 'server'
 ```
 
 ## TypeScript
