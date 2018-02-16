@@ -107,6 +107,37 @@ npm run test
 
 This test example was built based on `@vue/cli`
 
+## SEO (page headers)
+
+If you're using SSR then you probably need it for SEO. Question is - how to manage page headers (title, meta and etc.)
+
+For this purpose you can use mixin `DocumentHeaderMixing`. It's a raw example, probably you will want to use
+other packages that Vue
+
+```vue
+
+<script>
+    import {DocumentHeaderMixing} from "@/mixin"
+
+    export default {
+        metaInfo: {
+            title: 'BookTitle',
+        },
+        mixins: [DocumentHeaderMixing.getProperties()]
+    }
+</script>
+
+```
+
+Based on `VUE_ENV` will be exported or `ClientDocumentHeaderMixin` or `SSRDocumentHeaderMixin`
+
+Preferable to use this mixin on Component that attached to route in router config, to prevent
+misunderstanding with Head info set. Depends on build (server or client) there is a different approach how to manage
+head information. During SSR render each component will have `$ssrContext` property,
+which can be used to set up variables in `index.template.html` during server render.
+
+For Client build - you can operate with DOM itself
+
 ## Build setup
 
 **Requires Node.js 7+**

@@ -1,17 +1,17 @@
-import VueMixin from "@/mixin/contract/VueMixin";
-import ComponentMetaParser from "@/service/ComponentMetaParser";
+import VueMixin from "@/mixin/contract/VueMixin"
+import ComponentMetaParser from "@/service/ComponentMetaParser"
 
 export default class ClientDocumentHeaderMixin implements VueMixin {
-    created () {
+    private setMetaInfo(): void {
         const componentMeta = new ComponentMetaParser(this)
         if (componentMeta.hasMeta()) {
             document.title = `Vue HN 2.0 | ${componentMeta.getTitle()}`
         }
     }
 
-    getProperties () {
+    getProperties(): {[key: string]: any} {
         return {
-            created: this.created
+            mounted: this.setMetaInfo
         };
     }
 }
