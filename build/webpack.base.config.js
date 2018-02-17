@@ -43,6 +43,7 @@ module.exports = {
     resolve: {
         alias: {
             'public': path.resolve(__dirname, '../public'),
+            'assets': path.resolve(__dirname, '../src/assets'),
             '@': path.resolve(__dirname, '../src')
         },
         extensions: ['.ts', '.tsx', '.js']
@@ -76,6 +77,15 @@ module.exports = {
                         fallback: 'vue-style-loader'
                     })
                     : ['vue-style-loader', 'css-loader']
+            },
+            {
+                test: /\.scss/,
+                use: isProd
+                    ? ExtractTextPlugin.extract({
+                        use: 'sass-loader?minimize',
+                        fallback: 'vue-style-loader'
+                    })
+                    : ['vue-style-loader', 'sass-loader']
             },
             {
                 test: /\.tsx?$/,
