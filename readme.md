@@ -13,7 +13,7 @@ API layer uses Axios (implementation is in **/src/service**) transport to make r
 
 Store is split on modules in **/src/store**
 
-## SSR
+## SSR (Server Side Rendering)
 
 This project is configured with Webpack + Express.
 
