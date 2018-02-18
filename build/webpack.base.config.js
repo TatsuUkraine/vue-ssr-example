@@ -5,7 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
-const config = require('./env-loader')({stringify: false});
+const config = require('./env-loader')({stringify: false})
+const styleLoader = require('./style-loader')
 
 const isProd = config.NODE_ENV === 'production'
 
@@ -71,29 +72,23 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: isProd
-                    ? ExtractTextPlugin.extract({
-                        use: 'css-loader?minimize',
-                        fallback: 'vue-style-loader'
-                    })
-                    : ['vue-style-loader', 'css-loader']
+                use: styleLoader.getLoaders({extract: isProd, minimize: isProd})
             },
             {
                 test: /\.scss/,
-                use: isProd
-                    ? ExtractTextPlugin.extract({
-                        use: 'sass-loader?minimize',
-                        fallback: 'vue-style-loader'
-                    })
-                    : ['vue-style-loader', 'sass-loader']
+                use: styleLoader.getLoaders({extract: isProd, minimize: isProd, loader: 'scss'})
             },
             {
                 test: /\.tsx?$/,
-                loader: 'ts-loader',
-                options: {
-                    // disable type checker - we will use it in fork plugin
-                    transpileOnly: true
-                }
+                use: [{
+                    loader: 'babel-loader'
+                },{
+                    loader: 'ts-loader',
+                    options: {
+                        // disable type checker - we will use it in fork plugin
+                        transpileOnly: true
+                    }
+                }],
             }
         ]
     },
@@ -101,5 +96,17 @@ module.exports = {
         maxEntrypointSize: 300000,
         hints: isProd ? 'warning' : false
     },
-    plugins: plugins
+    plugins: plugins,
+    node: {
+        // prevent webpack from injecting useless setImmediate polyfill because Vue
+        // source contains it (although only uses it if it's native).
+        setImmediate: false,
+        // prevent webpack from injecting mocks to Node native modules
+        // that does not make sense for the client
+        dgram: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        child_process: 'empty'
+    }
 }
