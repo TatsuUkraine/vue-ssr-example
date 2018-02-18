@@ -76,7 +76,7 @@ module.exports = {
             },
             {
                 test: /\.scss/,
-                use: styleLoader.getLoaders({extract: isProd, minimize: isProd, loader: 'scss'})
+                use: styleLoader.getLoaders({extract: isProd, minimize: isProd, loader: 'sass'})
             },
             {
                 test: /\.tsx?$/,
