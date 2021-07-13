@@ -31,7 +31,7 @@ This project is configured with Webpack + Express.
 
 During server rendering, App will find matching Components by requested URL that has asyncData method.
 
-### Highly resomended
+### Highly recomended
 Make API requests to fetch data, that will be used in child components or layouts,
 in `asyncData` - to prepare all needed data, that you are going to use. It will prevent you
 from problems when SSR rendered page and Client rendered page will be contains different result.
